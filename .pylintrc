@@ -1,0 +1,44 @@
+[MAIN]
+
+# Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
+# number of processors available to use.
+jobs=0
+
+
+[MESSAGES CONTROL]
+
+# Disable the message, report, category or checker with the given id(s). You
+# can either give multiple identifiers separated by comma (,) or put this
+# option multiple times (only on the command line, not in the configuration
+# file where it should appear only once).You can also use "--disable=all" to
+# disable everything first and then re-enable specific checks. For example, if
+# you want to run only the similarities checker, you can use "--disable=all
+# --enable=similarities". If you want to run only the classes checker, but have
+# no Warning level messages displayed, use"--disable=all --enable=classes
+# --disable=W"
+
+disable=
+    wrong-import-position,  # isort takes care of these
+    wrong-import-order,
+    ungrouped-imports,
+    import-outside-toplevel,
+    line-too-long,  # black takes care of line length
+    missing-module-docstring,
+    missing-function-docstring,
+    missing-class-docstring,
+
+
+[BASIC]
+
+# Good variable names regexes, separated by a comma. If names match any regex,
+# they will always be accepted
+good-names-rgxs=
+    ^[a-z]$,  # 1-char
+    ^[a-z][a-z]$,  # 2-char
+    ^mock_\w+$,  # mock_Foo
+    ^_+\w*$,  # _, _foo, __foo
+    ^T\w+$,  # TTypeVar
+
+# Regular expression matching correct function names
+#              snake_case              test_foo
+function-rgx=^(([a-z_][a-z0-9_]{2,64})|(test_\w+))$
