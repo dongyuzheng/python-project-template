@@ -1,13 +1,30 @@
-FROM python:3.10
+FROM python:3.11
+
+#
+# Prereq set up
+#
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Install Poetry to /opt
+ENV POETRY_HOME=/opt/poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PATH="/opt/poetry/bin:${PATH}"
+
+# Install Python packages to be system wide
+ENV POETRY_VIRTUALENVS_CREATE=false
+
+#
+# Backend code
+#
+
 WORKDIR /code
 
-RUN pip install poetry
-
+# Copy deps config and install them
 COPY pyproject.toml .
 COPY poetry.lock .
+RUN poetry install --no-interaction --no-ansi
 
-RUN poetry install
+# Some runtime settings
+ENV PYTHONPATH=/code
