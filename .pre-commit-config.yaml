@@ -31,7 +31,7 @@ repos:
         types:
           - python
         args:
-          - "bb_backend"
+          - "."
       - id: mypy
         name: mypy
         entry: mypy
@@ -53,6 +53,3 @@ repos:
         language: system
         types:
           - python
-        args:
-          - "--load-plugins=pylint_django"
-          - "--django-settings-module=bb_backend.settings.test"
