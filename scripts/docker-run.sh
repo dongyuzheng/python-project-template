@@ -12,16 +12,12 @@
 
 set -euxo pipefail
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "${SCRIPT_DIR}"/..
-
-DOCKER_IMAGE='big-business_devserver'
-
-docker build -t "$DOCKER_IMAGE" -f Dockerfile.dev .
 
 CMD="$@"
 if [ -z "$CMD" ]; then
     CMD='/bin/bash'
 fi
 
-docker run --rm -it -v "$(pwd)":/code "$DOCKER_IMAGE" $CMD
+docker compose run --rm -it --workdir /code/ devserver $CMD
