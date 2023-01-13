@@ -24,6 +24,7 @@ build-backend = "poetry.core.masonry.api"
 profile = "black"
 line_length = 120
 atomic = true
+add_imports = ["from __future__ import annotations"]
 
 [tool.black]
 line-length = 120
@@ -32,4 +33,4 @@ line-length = 120
 strict = true
 
 [tool.bandit]
-exclude_dirs = ["*/test_*.py"]
+exclude_dirs = [".venv/", "*/test_*.py"]
